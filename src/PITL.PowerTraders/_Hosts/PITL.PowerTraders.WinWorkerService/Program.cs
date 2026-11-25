@@ -3,6 +3,7 @@ using PITL.PowerTraders.AppServices.Services;
 using PITL.PowerTraders.CsvGeneratorService;
 using PITL.PowerTraders.Interfaces;
 using PITL.PowerTraders.Models.DomainModels;
+using PITL.PowerTraders.Models.Settings;
 using PITL.PowerTraders.PowerServiceConsumer;
 using PITL.PowerTraders.PowerServiceConsumer.Mapper;
 using PITL.PowerTraders.WinWorkerService;
@@ -35,6 +36,8 @@ else
     .AddJsonFile("appsettings.Test.json", optional: false, reloadOnChange: true)
     .AddEnvironmentVariables();
 }
+
+builder.Services.Configure<PowerReportSetting>(builder.Configuration.GetSection(PowerReportSetting.SectionName));
 
 Log.Logger = new LoggerConfiguration()
     .ReadFrom.Configuration(builder.Configuration)

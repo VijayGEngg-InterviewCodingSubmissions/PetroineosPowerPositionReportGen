@@ -1,10 +1,12 @@
 ﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using PITL.PowerTraders.AppServices;
 using PITL.PowerTraders.AppServices.Services;
 using PITL.PowerTraders.CsvGeneratorService;
 using PITL.PowerTraders.IntegrationTests.BaseClasses;
 using PITL.PowerTraders.Interfaces;
 using PITL.PowerTraders.Models.DomainModels;
+using PITL.PowerTraders.Models.Settings;
 using PITL.PowerTraders.PowerServiceConsumer;
 using PITL.PowerTraders.PowerServiceConsumer.Mapper;
 using Services;
@@ -34,12 +36,19 @@ namespace PITL.PowerTraders.IntegrationTests.Services
             ILogger<PowerTradeReportDataService> powerTradeReptDataSvcLogger = LoggerFactory.CreateLogger<PowerTradeReportDataService>();
             _powerTradeReportDataSvc = new PowerTradeReportDataService(powerTradeReptDataSvcLogger);
 
+            PowerReportSetting powerReportSetting = new PowerReportSetting();
+            powerReportSetting.CsvDelimiter = ",";
+            powerReportSetting.ExtractIntervalMinutes = 1;
+            powerReportSetting.OutputFolderName = "TestOutputDir";
+            IOptions<PowerReportSetting> _reportSettingsOpts = Options.Create<PowerReportSetting>(powerReportSetting);
+
             // SUT Instancing
             ILogger<PowerServiceReportGenOrchestrator> orchServiceLogger = LoggerFactory.CreateLogger<PowerServiceReportGenOrchestrator>();
             _sut = new PowerServiceReportGenOrchestrator(orchServiceLogger, 
                 _powerServiceTradeSubscriberSvc,
                 _powerTradeReportDataSvc,
-                _csvReportWriter);
+                _csvReportWriter,
+                _reportSettingsOpts);
         }
 
         [Fact]

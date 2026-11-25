@@ -1,6 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using PITL.PowerTraders.Interfaces;
 using PITL.PowerTraders.Models.ResultModels;
+using PITL.PowerTraders.Models.Settings;
 
 namespace PITL.PowerTraders.AppServices
 {
@@ -11,16 +13,20 @@ namespace PITL.PowerTraders.AppServices
         private readonly IPowerTradeReportDataService _tradeReportDataService;
         private readonly ICsvReportWriter _csvWriter;
 
+        private readonly PowerReportSetting _reportSettings;
+
         public PowerServiceReportGenOrchestrator(
             ILogger<PowerServiceReportGenOrchestrator> logger,
             IPowerTradeProviderService powerServiceConsumer,
             IPowerTradeReportDataService tradeReportDataService,
-            ICsvReportWriter csvWriter)
+            ICsvReportWriter csvWriter,
+            IOptions<PowerReportSetting> reportSettingOpts)
         {
             _logger = logger;
             _powerServiceConsumer = powerServiceConsumer;
             _tradeReportDataService = tradeReportDataService;
             _csvWriter = csvWriter;
+            _reportSettings = reportSettingOpts.Value;
         }
 
         public async Task<PowerPositionReportFileGenResult> GeneratePowerPositionReportAsync(DateTime date)

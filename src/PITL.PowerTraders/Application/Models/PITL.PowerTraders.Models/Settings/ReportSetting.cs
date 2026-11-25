@@ -1,9 +1,13 @@
 ﻿namespace PITL.PowerTraders.Models.Settings
 {
-    public class ReportSetting
+    public class PowerReportSetting
     {
-        public string OutputFolderName { get; set; }
+        public const string SectionName = "PowerReportSettings";
 
-        public int ExtractIntervalMinutes { get; set; }
+        public string OutputFolderName { get; set; } = string.Empty;
+
+        public string CsvDelimiter { get; set; } = ",";
+
+        public int ExtractIntervalMinutes { get; set; } = 5;
     }
 }

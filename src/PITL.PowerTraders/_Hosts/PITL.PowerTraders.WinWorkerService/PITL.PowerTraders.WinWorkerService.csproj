@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>dotnet-PITL.PowerTraders.WinWorkerService-2f4454f0-bacb-4966-9903-2c75444a3fd3</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration" Version="11.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Configuration.Json" Version="11.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting" Version="11.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Hosting.WindowsServices" Version="11.0.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="11.0.0" />
+    <PackageReference Include="Serilog" Version="4.4.0" />
+    <PackageReference Include="Serilog.AspNetCore" Version="11.0.0" />
+    <PackageReference Include="Serilog.Settings.Configuration" Version="11.0.0" />
+    <PackageReference Include="Serilog.Sinks.Console" Version="6.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Adapters\PITL.PowerTraders.CsvGeneratorService\PITL.PowerTraders.CsvGeneratorService.csproj" />
+    <ProjectReference Include="..\..\Adapters\PITL.PowerTraders.PowerServiceConsumer\PITL.PowerTraders.PowerServiceConsumer.csproj" />
+    <ProjectReference Include="..\..\Application\Models\PITL.PowerTraders.Models\PITL.PowerTraders.Models.csproj" />
+    <ProjectReference Include="..\..\Application\Ports\PITL.PowerTraders.Interfaces\PITL.PowerTraders.Interfaces.csproj" />
+    <ProjectReference Include="..\..\Application\Services\PITL.PowerTraders.AppServices\PITL.PowerTraders.AppServices.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="PowerService">
+      <HintPath>..\..\Tests\PITL.PowerTraders.IntegrationTests\Resources\PowerService.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+</Project>

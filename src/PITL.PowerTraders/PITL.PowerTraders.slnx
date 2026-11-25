@@ -18,6 +18,6 @@
     <Project Path="Tests/PITL.PowerTraders.UnitTests/PITL.PowerTraders.UnitTests.csproj" />
   </Folder>
   <Folder Name="/_Hosts/">
-    <Project Path="_Hosts/PITL.PowerTraders.ConsoleAppWinSvc/PITL.PowerTraders.ConsoleAppWinSvc.csproj" />
+    <Project Path="_Hosts/PITL.PowerTraders.WinWorkerService/PITL.PowerTraders.WinWorkerService.csproj" Id="9d656d58-82e3-4463-a6a0-59c6fbfc43c3" />
   </Folder>
 </Solution>

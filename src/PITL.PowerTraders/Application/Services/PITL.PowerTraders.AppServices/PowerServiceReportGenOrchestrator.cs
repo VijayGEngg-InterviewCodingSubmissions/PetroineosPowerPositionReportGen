@@ -1,20 +1,19 @@
 ﻿using Microsoft.Extensions.Logging;
 using PITL.PowerTraders.Interfaces;
 using PITL.PowerTraders.Models.ResultModels;
-using System.Text;
 
 namespace PITL.PowerTraders.AppServices
 {
     public class PowerServiceReportGenOrchestrator : IPowerServiceReportGenOrchestrator
     {
         private readonly ILogger<PowerServiceReportGenOrchestrator> _logger;
-        private readonly IPowerServiceTradeSubscriberService _powerServiceConsumer;
+        private readonly IPowerTradeProviderService _powerServiceConsumer;
         private readonly IPowerTradeReportDataService _tradeReportDataService;
         private readonly ICsvReportWriter _csvWriter;
 
         public PowerServiceReportGenOrchestrator(
             ILogger<PowerServiceReportGenOrchestrator> logger,
-            IPowerServiceTradeSubscriberService powerServiceConsumer,
+            IPowerTradeProviderService powerServiceConsumer,
             IPowerTradeReportDataService tradeReportDataService,
             ICsvReportWriter csvWriter)
         {
@@ -24,7 +23,7 @@ namespace PITL.PowerTraders.AppServices
             _csvWriter = csvWriter;
         }
 
-        public async Task<PowerPositionReportFileGenResult> GeneratePowerPositionReport(DateTime date)
+        public async Task<PowerPositionReportFileGenResult> GeneratePowerPositionReportAsync(DateTime date)
         {
             _logger.LogInformation("Generation function of Power Postion Report Started.");
 
@@ -73,10 +72,12 @@ namespace PITL.PowerTraders.AppServices
             return reportGenResult;
         }
 
-        private string GetReportFileName(DateTime reportDateTime)
+        public string GetReportFileName(DateTime reportDateTime)
         {
-
-            return $"PowerPosition_{reportDateTime.AddDays(1).Date.ToString("yyyymmdd")}_{reportDateTime.ToString("HH:mm")}.csv";
+            if (reportDateTime != DateTime.MinValue || reportDateTime != DateTime.MaxValue)
+                return $"PowerPosition_{reportDateTime.AddDays(1).Date.ToString("yyyymmdd")}_{reportDateTime.ToString("HH:mm")}.csv";
+            else
+                return string.Empty;
         }
     }
 }

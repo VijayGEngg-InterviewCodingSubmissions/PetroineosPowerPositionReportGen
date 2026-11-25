@@ -5,13 +5,13 @@ using PITL.PowerTraders.Interfaces;
 
 namespace PITL.PowerTraders.PowerServiceConsumer
 {
-    public class PowerServiceTradeSubscriberService : IPowerServiceTradeSubscriberService
+    public class PowerTradeProviderService : IPowerTradeProviderService
     {
-        private readonly ILogger<PowerServiceTradeSubscriberService> _logger;
+        private readonly ILogger<PowerTradeProviderService> _logger;
         private readonly IMapper<PowerTrade, PowerTradeDTO> _mapper;
 
-        public PowerServiceTradeSubscriberService(
-            ILogger<PowerServiceTradeSubscriberService> logger,
+        public PowerTradeProviderService(
+            ILogger<PowerTradeProviderService> logger,
             IMapper<PowerTrade, PowerTradeDTO> mapper) 
         {
             _logger = logger;

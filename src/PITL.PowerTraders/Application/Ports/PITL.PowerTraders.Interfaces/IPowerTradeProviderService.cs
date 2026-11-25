@@ -2,7 +2,7 @@
 
 namespace PITL.PowerTraders.Interfaces
 {
-    public interface IPowerServiceTradeSubscriberService
+    public interface IPowerTradeProviderService
     {
         IEnumerable<PowerTradeDTO> GetTrades(DateTime date);
 

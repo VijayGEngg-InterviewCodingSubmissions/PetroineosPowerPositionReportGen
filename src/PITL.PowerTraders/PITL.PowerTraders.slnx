@@ -1,0 +1,23 @@
+<Solution>
+  <Folder Name="/Adapters/">
+    <Project Path="Adapters/PITL.PowerTraders.CsvGeneratorService/PITL.PowerTraders.CsvGeneratorService.csproj" />
+    <Project Path="Adapters/PITL.PowerTraders.PowerServiceConsumer/PITL.PowerTraders.PowerServiceConsumer.csproj" />
+  </Folder>
+  <Folder Name="/Application/" />
+  <Folder Name="/Application/Models/">
+    <Project Path="Application/Models/PITL.PowerTraders.Models/PITL.PowerTraders.Models.csproj" />
+  </Folder>
+  <Folder Name="/Application/Ports/">
+    <Project Path="Application/Ports/PITL.PowerTraders.Interfaces/PITL.PowerTraders.Interfaces.csproj" />
+  </Folder>
+  <Folder Name="/Application/Services/">
+    <Project Path="Application/Services/PITL.PowerTraders.AppServices/PITL.PowerTraders.AppServices.csproj" />
+  </Folder>
+  <Folder Name="/Tests/">
+    <Project Path="Tests/PITL.PowerTraders.IntegrationTests/PITL.PowerTraders.IntegrationTests.csproj" />
+    <Project Path="Tests/PITL.PowerTraders.UnitTests/PITL.PowerTraders.UnitTests.csproj" />
+  </Folder>
+  <Folder Name="/_Hosts/">
+    <Project Path="_Hosts/PITL.PowerTraders.ConsoleAppWinSvc/PITL.PowerTraders.ConsoleAppWinSvc.csproj" />
+  </Folder>
+</Solution>

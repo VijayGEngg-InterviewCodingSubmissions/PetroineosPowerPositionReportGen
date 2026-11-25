@@ -35,7 +35,7 @@ namespace PITL.PowerTraders.AppServices
 
             PowerPositionReportFileGenResult reportGenResult = new PowerPositionReportFileGenResult();
 
-            if(date < DateTime.Today.Date)
+            if (date != DateTime.MinValue && date != DateTime.MaxValue)
             {
                 DateTime reportDateTime = new DateTime(date.Year, date.Month, date.Day, 23, 0, 0).AddDays(-1);
                 reportGenResult.StartPeriod = reportDateTime;
@@ -80,7 +80,8 @@ namespace PITL.PowerTraders.AppServices
 
         public string GetReportFileName(DateTime reportDateTime)
         {
-            if (reportDateTime != DateTime.MinValue || reportDateTime != DateTime.MaxValue)
+            if (reportDateTime != DateTime.MinValue && 
+                reportDateTime != DateTime.MaxValue)
                 return $"PowerPosition_{reportDateTime.AddDays(1).Date.ToString("yyyymmdd")}_{reportDateTime.ToString("HH:mm")}.csv";
             else
                 return string.Empty;

@@ -46,8 +46,8 @@ Log.Logger = new LoggerConfiguration()
 builder.Services.AddSerilog();
 
 // 1. Add Adapter Services
-builder.Services.AddScoped<IMapper<PowerPeriod, PowerPeriodDTO>, PowerPeriodMapper>();
-builder.Services.AddScoped<IMapper<PowerTrade, PowerTradeDTO>, PowerTradeMapper>();
+builder.Services.AddTransient<IMapper<PowerPeriod, PowerPeriodDTO>, PowerPeriodMapper>();
+builder.Services.AddTransient<IMapper<PowerTrade, PowerTradeDTO>, PowerTradeMapper>();
 
 builder.Services.AddTransient<IPowerTradeProviderService, PowerTradeProviderService>();
 builder.Services.AddTransient<ICsvReportWriter, CsvReportWriter>();
@@ -56,7 +56,7 @@ builder.Services.AddTransient<ICsvReportWriter, CsvReportWriter>();
 builder.Services.AddTransient<IPowerTradeReportDataService, PowerTradeReportDataService>();
 builder.Services.AddTransient<IPowerServiceReportGenOrchestrator, PowerServiceReportGenOrchestrator>();
 
-builder.Services.AddHostedService<Worker>();
+builder.Services.AddHostedService<WorkerBgService>();
 
 try
 {

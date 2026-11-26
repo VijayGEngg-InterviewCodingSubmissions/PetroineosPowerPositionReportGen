@@ -60,7 +60,7 @@ namespace PITL.PowerTraders.AppServices
                 CsvGenerationResult reportFileCreationResult = null;
                 if (powerVolumeDataGenResult.IsSuccess)
                 {
-                    string reportFileName = GetReportFileName(reportDateTime);
+                    string reportFileName = $"PowerPosition_{DateTime.UtcNow.Date.ToString("yyyyMMdd")}_{DateTime.UtcNow.ToString("HHmm")}.csv";
                     reportGenResult.CsvReportFileName = reportFileName;
                     _logger.LogInformation($"Initiating the CSV Report generating service to generate the Report file with name: {reportFileName}.");
 
@@ -76,15 +76,6 @@ namespace PITL.PowerTraders.AppServices
             _logger.LogInformation("Generation function of Power Postion Report Finished.");
 
             return reportGenResult;
-        }
-
-        public string GetReportFileName(DateTime reportDateTime)
-        {
-            if (reportDateTime != DateTime.MinValue && 
-                reportDateTime != DateTime.MaxValue)
-                return $"PowerPosition_{reportDateTime.AddDays(1).Date.ToString("yyyymmdd")}_{reportDateTime.ToString("HH:mm")}.csv";
-            else
-                return string.Empty;
         }
     }
 }

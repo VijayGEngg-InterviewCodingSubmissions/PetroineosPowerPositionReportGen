@@ -64,6 +64,13 @@ namespace PITL.PowerTraders.IntegrationTests.Services
 
             Assert.NotNull(result);
             Assert.True(result.IsSuccess);
+            Assert.True(!string.IsNullOrWhiteSpace(result.CsvReportFileName));
+            Assert.True(!string.IsNullOrWhiteSpace(result.ReportFilePath));
+            Assert.True(Directory.Exists(result.ReportFilePath));
+            Assert.True(result.CsvReportFileName.StartsWith("PowerPosition_"));
+            Assert.True(result.CsvReportFileName.EndsWith(".csv"));
+            string genFileFullPath = Path.Combine(result.ReportFilePath, result.CsvReportFileName);
+            Assert.True(File.Exists(genFileFullPath));
         }
     }
 }

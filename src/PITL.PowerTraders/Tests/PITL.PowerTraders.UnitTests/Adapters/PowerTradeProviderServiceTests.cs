@@ -1,7 +1,5 @@
-﻿using FluentAssertions;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using NSubstitute;
-using NSubstitute.ReceivedExtensions;
 using PITL.PowerTraders.Interfaces;
 using PITL.PowerTraders.Models.DomainModels;
 using PITL.PowerTraders.PowerServiceConsumer;

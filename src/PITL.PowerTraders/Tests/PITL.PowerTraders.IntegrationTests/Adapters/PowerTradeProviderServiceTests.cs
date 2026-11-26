@@ -94,8 +94,7 @@ namespace PITL.PowerTraders.IntegrationTests.Adapters
             Assert.NotNull(_sut);
             Assert.IsType<PowerTradeProviderService>(_sut);
 
-            DateTime date = DateTime.MinValue;
-            Assert.ThrowsAsync<ArgumentOutOfRangeException>(async () => await _sut.GetTradesAsync(date));
+            await Assert.ThrowsAsync<ArgumentOutOfRangeException>(async () => await _sut.GetTradesAsync(DateTime.MinValue));
         }
     }
 }

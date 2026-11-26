@@ -57,7 +57,7 @@ namespace PITL.PowerTraders.IntegrationTests.Services
             Assert.NotNull(_sut);
             Assert.IsType<PowerServiceReportGenOrchestrator>(_sut);
 
-            // Pick a date roughly a week ago
+            // Pick a date that is 7 days back
             DateTime reptDate = new DateTime(DateTime.Today.Year, DateTime.Today.Month, DateTime.Today.Day).AddDays(-7);
 
             var result = await _sut.GeneratePowerPositionReportAsync(reptDate);

@@ -12,7 +12,7 @@ namespace PITL.PowerTraders.CsvGeneratorService
 
         public CsvReportWriter(ILogger<CsvReportWriter> logger) => _logger = logger;
 
-        public CsvGenerationResult GeneratePeriodVolumeCsvFile(string fileName, List<PeriodVolumeDTO> periodVolumeData)
+        public virtual CsvGenerationResult GeneratePeriodVolumeCsvFile(string fileName, List<PeriodVolumeDTO> periodVolumeData)
         {
             CsvGenerationResult csvFileGenResult = new CsvGenerationResult();
             

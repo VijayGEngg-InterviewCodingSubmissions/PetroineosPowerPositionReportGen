@@ -27,6 +27,7 @@
     <ProjectReference Include="..\..\Adapters\PITL.PowerTraders.CsvGeneratorService\PITL.PowerTraders.CsvGeneratorService.csproj" />
     <ProjectReference Include="..\..\Adapters\PITL.PowerTraders.PowerServiceConsumer\PITL.PowerTraders.PowerServiceConsumer.csproj" />
     <ProjectReference Include="..\..\Application\Ports\PITL.PowerTraders.Interfaces\PITL.PowerTraders.Interfaces.csproj" />
+    <ProjectReference Include="..\..\Application\Services\PITL.PowerTraders.AppServices\PITL.PowerTraders.AppServices.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -52,7 +52,7 @@ namespace PITL.PowerTraders.IntegrationTests.Services
         }
 
         [Fact]
-        public async Task OrchestrationService_EndToEndTest()
+        public async Task OrchestrationService_EndToEndTest_Positive()
         {
             Assert.NotNull(_sut);
             Assert.IsType<PowerServiceReportGenOrchestrator>(_sut);
@@ -71,6 +71,57 @@ namespace PITL.PowerTraders.IntegrationTests.Services
             Assert.True(result.CsvReportFileName.EndsWith(".csv"));
             string genFileFullPath = Path.Combine(result.ReportFilePath, result.CsvReportFileName);
             Assert.True(File.Exists(genFileFullPath));
+        }
+
+        [Fact]
+        public async Task OrchestrationService_DoesNOTProcessData_If_Invalid_DateTime_Max_Is_Provided()
+        {
+            Assert.NotNull(_sut);
+            Assert.IsType<PowerServiceReportGenOrchestrator>(_sut);
+
+            // Pick a date roughly a week ago
+            DateTime reptDate = DateTime.MaxValue;
+
+            var result = await _sut.GeneratePowerPositionReportAsync(reptDate);
+
+            Assert.NotNull(result);
+            Assert.False(result.IsSuccess);
+            Assert.True(string.IsNullOrWhiteSpace(result.CsvReportFileName));
+            Assert.True(string.IsNullOrWhiteSpace(result.ReportFilePath));
+        }
+
+        [Fact]
+        public async Task OrchestrationService_DoesNOTProcessData_If_Invalid_DateTime_Min_Is_Provided()
+        {
+            Assert.NotNull(_sut);
+            Assert.IsType<PowerServiceReportGenOrchestrator>(_sut);
+
+            // Pick a date roughly a week ago
+            DateTime reptDate = DateTime.MinValue;
+
+            var result = await _sut.GeneratePowerPositionReportAsync(reptDate);
+
+            Assert.NotNull(result);
+            Assert.False(result.IsSuccess);
+            Assert.True(string.IsNullOrWhiteSpace(result.CsvReportFileName));
+            Assert.True(string.IsNullOrWhiteSpace(result.ReportFilePath));
+        }
+
+        [Fact]
+        public async Task OrchestrationService_DoesNOTProcessData_If_Invalid_DateTime_Is_Provided()
+        {
+            Assert.NotNull(_sut);
+            Assert.IsType<PowerServiceReportGenOrchestrator>(_sut);
+
+            // Pick a date roughly a week ago
+            DateTime reptDate = default(DateTime);
+
+            var result = await _sut.GeneratePowerPositionReportAsync(reptDate);
+
+            Assert.NotNull(result);
+            Assert.False(result.IsSuccess);
+            Assert.True(string.IsNullOrWhiteSpace(result.CsvReportFileName));
+            Assert.True(string.IsNullOrWhiteSpace(result.ReportFilePath));
         }
     }
 }

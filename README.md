@@ -72,7 +72,6 @@ The solution follows a layered architecture with clear separation between busine
 - Dependency Injection
 - Serilog
 - xUnit
-- FluentAssertions
 - CsvHelper
 
 ---

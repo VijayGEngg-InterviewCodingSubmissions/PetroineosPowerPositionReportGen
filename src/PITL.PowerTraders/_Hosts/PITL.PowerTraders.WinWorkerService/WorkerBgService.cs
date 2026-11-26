@@ -22,11 +22,11 @@ namespace PITL.PowerTraders.WinWorkerService
             _reportSettings = reportSettingsOpts.Value;
         }
 
-        public override async Task StartAsync(CancellationToken cancellationToken)
+        public override Task StartAsync(CancellationToken cancellationToken)
         {
             _logger.LogInformation("Start called first time after restarting or first start of the back ground service.");
 
-            await ExecuteAsync(cancellationToken);
+            ExecuteAsync(cancellationToken);
 
             return base.StartAsync(cancellationToken);
         }
@@ -34,6 +34,7 @@ namespace PITL.PowerTraders.WinWorkerService
         public override Task StopAsync(CancellationToken cancellationToken)
         {
             _logger.LogInformation("Stop function called.");
+
             return base.StopAsync(cancellationToken);
         }
 
@@ -45,23 +46,26 @@ namespace PITL.PowerTraders.WinWorkerService
             // And then after the execution is controlled by timer.
             PowerPositionReportFileGenResult result = await _reportGenOrchestrator.GeneratePowerPositionReportAsync(DateTime.UtcNow);
             string outputFolderFileLoc = CopyGeneratedReportToOutputFolder(result);
+
             if(result.IsSuccess)
+            {
                 _logger.LogInformation("The Power Report generation finished successfully. " +
                     $"The new report file with name: {result.CsvReportFileName} is created in output folder.");
+            }
             else
+            {
                 _logger.LogInformation("The Power Report generation finished with failure. " +
                     $"Reason for failure: {result.ErrorMessage}.");
+            }
 
             _logger.LogInformation("Starting the polling timer to start Power Period Report Generator. " +
                 $"Timer time interval is {_reportSettings.ExtractIntervalMinutes} minutes.");
 
             using var timer = new PeriodicTimer(TimeSpan.FromMinutes(_reportSettings.ExtractIntervalMinutes));
 
-            //while (!stoppingToken.IsCancellationRequested)
             while (await timer.WaitForNextTickAsync(stoppingToken))
             {
                 _logger.LogInformation($"Time Interval Elapsed: Worker Started for Power Period Report Generator Time: {DateTimeOffset.Now} ...");
-
 
                 try
                 {

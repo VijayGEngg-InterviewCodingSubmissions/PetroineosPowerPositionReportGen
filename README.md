@@ -82,10 +82,11 @@ The solution follows a layered architecture with clear separation between busine
 src/
 ├── Domain
 ├── Application
-├── Infrastructure
+├── Infrastructure (Adapters)
 └── Worker
 
 tests/
+└── IntegrationTests
 └── UnitTests
 ```
 
@@ -185,6 +186,3 @@ Potential enhancements include:
 
 ---
 
-## Author
-
-Vijayendra Ghatge
